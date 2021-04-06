@@ -1,14 +1,6 @@
 const github = require('@actions/github');
 const axios = require('axios');
 
-const get = async (url, key) => {
-    return await axios.get(url, {
-        params: {
-            apiKey: key
-        }
-    })
-}
-
 const main = async () => {
     console.log("start");
 
@@ -25,18 +17,26 @@ const main = async () => {
         console.log(issue.body);
         console.log(issue.title);
         console.log(issue.html_url);
+        const PRIORITY_ID = "3";
+
+        //課題作成する
+        const CreateIssueUrl = `https://${API_HOST}/api/v2/issues/${PROJECT_ID}/issueTypes?apiKey=${API_KEY}`;
+        const res = await axios.post(CreateIssueUrl, {
+            projectId: PROJECT_ID,
+            summary: issue.title,
+            issueTypeId: ISSUE_TYPE_ID,
+            priorityId: PRIORITY_ID,
+            description: `${issue.body}\ngithubURL:${issue.html_url}`
+        });
+        console.log(res);
+        console.log(res.data);
+
     }
 
     //issue作成の場合課題を作る
     if (issue.state == "close") {
         console.log("issuecloseされたよ");
     }
-
-    //とりあえずBACKLOGAPIを叩いてみる
-    const url = `https://${API_HOST}/api/v2/projects/${PROJECT_ID}/issueTypes`;
-    const res = await get(url, API_KEY);
-
-    console.log(res.data);
 }
 
 main();
