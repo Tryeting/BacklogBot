@@ -15,7 +15,7 @@ const getIssueTitle = () => {
 
 const payload = JSON.stringify(github.context.payload, undefined, 2)
 console.log(`The event payload: ${payload}`);
-console.log(getIssueTitle);
+console.log(getIssueTitle());
 const main = async () => {
     console.log("start");
 
