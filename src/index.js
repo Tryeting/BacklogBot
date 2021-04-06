@@ -9,9 +9,13 @@ const get = async (url, key) => {
     })
 }
 
+const getIssueTitle = () => {
+    return github.context.payload.issue.title;
+}
+
 const payload = JSON.stringify(github.context.payload, undefined, 2)
 console.log(`The event payload: ${payload}`);
-
+console.log(getIssueTitle);
 const main = async () => {
     console.log("start");
 
