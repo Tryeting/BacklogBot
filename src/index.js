@@ -18,10 +18,10 @@ const main = async () => {
         try {
             const params = new URLSearchParams();
             params.append("projectId", PROJECT_ID);
-            params.append("summary", `${issue.number} ${issue.title}`);
+            params.append("summary", `#${issue.number} ${issue.title}`);
             params.append("issueTypeId", ISSUE_TYPE_ID);
             params.append("priorityId", PRIORITY_ID);
-            params.append("description", `${issue.body}\ngithubURL:${issue.html_url}`);
+            params.append("description", `${issue.body}\n\ngithubURL：${issue.html_url}`);
             const res = await axios.post(CreateIssueUrl, params);
             console.log(res.data);
         }
