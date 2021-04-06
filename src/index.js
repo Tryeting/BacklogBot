@@ -9,13 +9,6 @@ const get = async (url, key) => {
     })
 }
 
-const getIssueTitle = () => {
-    return github.context.payload.issue.title;
-}
-
-const payload = JSON.stringify(github.context.payload, undefined, 2)
-console.log(`The event payload: ${payload}`);
-console.log(getIssueTitle());
 const main = async () => {
     console.log("start");
 
@@ -24,13 +17,26 @@ const main = async () => {
     const ISSUE_TYPE_ID = process.env.ISSUE_TYPE_ID;
     const PROJECT_ID = process.env.PROJECT_ID;
     const API_HOST = process.env.API_HOST;
+    const issue = github.context.payload.issue;
+
+    //issue作成の場合課題を作る
+    if (issue.state == "open") {
+        console.log("issue作成されたよ");
+        console.log(issue.body);
+        console.log(issue.title);
+        console.log(issue.html_url);
+    }
+
+    //issue作成の場合課題を作る
+    if (issue.state == "close") {
+        console.log("issuecloseされたよ");
+    }
 
     //とりあえずBACKLOGAPIを叩いてみる
     const url = `https://${API_HOST}/api/v2/projects/${PROJECT_ID}/issueTypes`;
     const res = await get(url, API_KEY);
 
     console.log(res.data);
-
 }
 
 main();
