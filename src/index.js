@@ -20,7 +20,7 @@ const main = async () => {
         const PRIORITY_ID = "3";
 
         //課題作成する
-        const CreateIssueUrl = `https://${API_HOST}/api/v2/issues/${PROJECT_ID}/issueTypes?apiKey=${API_KEY}`;
+        const CreateIssueUrl = `https://${API_HOST}/api/v2/issues?apiKey=${API_KEY}`;
         try {
             const params = new URLSearchParams();
             params.append("projectId",PROJECT_ID);
