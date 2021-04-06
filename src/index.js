@@ -21,15 +21,20 @@ const main = async () => {
 
         //課題作成する
         const CreateIssueUrl = `https://${API_HOST}/api/v2/issues/${PROJECT_ID}/issueTypes?apiKey=${API_KEY}`;
-        const res = await axios.post(CreateIssueUrl, {
-            projectId: PROJECT_ID,
-            summary: issue.title,
-            issueTypeId: ISSUE_TYPE_ID,
-            priorityId: PRIORITY_ID,
-            description: `${issue.body}\ngithubURL:${issue.html_url}`
-        });
-        console.log(res);
-        console.log(res.data);
+        try {
+            const params = new URLSearchParams();
+            params.append("projectId",PROJECT_ID);
+            params.append("summary",issue.title);
+            params.append("issueTypeId",ISSUE_TYPE_ID);
+            params.append("priorityId",PRIORITY_ID);
+            params.append("description",`${issue.body}\ngithubURL:${issue.html_url}`);
+            const res = await axios.post(CreateIssueUrl,params);
+            console.log(res);
+            console.log(res.data);
+        }
+        catch (e) {
+            console.log(e);
+        }
 
     }
 
