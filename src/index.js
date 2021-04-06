@@ -31,7 +31,7 @@ const main = async () => {
     }
 
     //issue作成の場合課題を作る
-    if (issue.state == "close") {
+    if (issue.state == "closed") {
         console.log("issuecloseされたよ");
     }
 }
