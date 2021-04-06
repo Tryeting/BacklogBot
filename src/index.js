@@ -1,10 +1,9 @@
 const github = require('@actions/github');
-const client = require('request');
+const axios = require('axios');
 
 const get = async (url, key) => {
-    return await client.get({
-        url: url,
-        qs: {
+    return await axios.get(url, {
+        params: {
             apiKey: key
         }
     })
@@ -21,9 +20,9 @@ const main = async () => {
 
     //とりあえずBACKLOGAPIを叩いてみる
     const url = `https://${API_HOST}/api/v2/projects/${PROJECT_ID}/issueTypes`;
-    const a = await get(url, API_KEY);
+    const res = await get(url, API_KEY);
 
-    console.log(a);
+    console.log(res.data);
 
 }
 
