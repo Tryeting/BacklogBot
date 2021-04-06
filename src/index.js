@@ -1,6 +1,15 @@
 const github = require('@actions/github');
 const client = require('request');
 
+const get = async (url,key) => {
+    return await client.get({
+        url:url,
+        qs:{
+            apiKey:key
+        }
+    })
+}
+
 const payload = JSON.stringify(github.context.payload, undefined, 2)
 console.log(`The event payload: ${payload}`);
 
@@ -17,12 +26,3 @@ const uel = `https://${API_HOST}/api/v2/projects/${PROJECT_ID}/issueTypes`;
 const a = get(url,API_KEY);
 
 console.log(a);
-
-const get = async (url,key) => {
-    return await client.get({
-        url:url,
-        qs:{
-            apiKey:key
-        }
-    })
-}
