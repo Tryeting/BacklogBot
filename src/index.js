@@ -27,7 +27,9 @@ const main = async () => {
             params.append("summary",issue.title);
             params.append("issueTypeId",ISSUE_TYPE_ID);
             params.append("priorityId",PRIORITY_ID);
-            params.append("description",`${issue.body}\ngithubURL:${issue.html_url}`);
+            // params.append("description",`${issue.body}\ngithubURL:${issue.html_url}`);
+            params.append("description","test");
+            console.log(params);
             const res = await axios.post(CreateIssueUrl,params);
             console.log(res);
             console.log(res.data);
