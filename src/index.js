@@ -10,8 +10,8 @@ const get = async (url,key) => {
     })
 }
 
-const payload = JSON.stringify(github.context.payload, undefined, 2)
-console.log(`The event payload: ${payload}`);
+// const payload = JSON.stringify(github.context.payload, undefined, 2)
+// console.log(`The event payload: ${payload}`);
 
 console.log("start");
 
