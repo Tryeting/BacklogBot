@@ -22,7 +22,7 @@ const PROJECT_ID = process.env.PROJECT_ID;
 const API_HOST = process.env.API_HOST;
 
 //とりあえずBACKLOGAPIを叩いてみる
-const uel = `https://${API_HOST}/api/v2/projects/${PROJECT_ID}/issueTypes`;
+const url = `https://${API_HOST}/api/v2/projects/${PROJECT_ID}/issueTypes`;
 const a = get(url,API_KEY);
 
 console.log(a);
