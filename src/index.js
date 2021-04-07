@@ -37,6 +37,7 @@ const main = async () => {
         //対応する課題を取得
         const keyword = `#${issue.number}%20${issue.title}`;
         const issues = await backlog.searchIssuesAsync(API_HOST, API_KEY, keyword);
+        console.log(keyword);
         console.log(issues);
         console.log("issuecloseされたよ");
     }
