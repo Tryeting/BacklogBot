@@ -39,7 +39,9 @@ const main = async () => {
         const issues = await backlog.searchIssuesAsync(API_HOST, API_KEY, keyword);
         console.log(keyword);
         console.log(issues);
-        console.log("issuecloseされたよ");
+        console.log(issues[0].id);
+        await backlog.closeIssueAsync(API_HOST, API_KEY, issues[0].id);
+        
     }
 }
 
