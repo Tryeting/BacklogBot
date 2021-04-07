@@ -25,6 +25,7 @@ const main = async () => {
             params.append("categoryId", CATEGORY_ID);
             const res = await backlog.addIssueAsync(API_HOST, API_KEY, params)
             console.log(res.data);
+            console.log(res.erros);
         }
         catch (e) {
             console.log(e);
