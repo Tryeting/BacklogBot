@@ -23,7 +23,7 @@ const main = async () => {
             params.append("priorityId", PRIORITY_ID);
             params.append("description", `${issue.body}\n\ngithubURL：${issue.html_url}`);
             params.append("categoryId", CATEGORY_ID);
-            const res = backlog.addIssueAsync(API_HOST,API_KEY, params)
+            const res = await backlog.addIssueAsync(API_HOST, API_KEY, params)
             console.log(res.data);
         }
         catch (e) {
