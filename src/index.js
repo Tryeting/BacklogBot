@@ -35,7 +35,7 @@ const main = async () => {
     //issue作成の場合課題を作る
     if (issue.state == "closed") {
         //対応する課題を取得
-        const keyword = `%23${issue.number}%20${issue.title}`;
+        const keyword = `#${issue.number} ${issue.title}`;
         const issues = await backlog.searchIssuesAsync(API_HOST, API_KEY, keyword);
         console.log(keyword);
         console.log(issues);
