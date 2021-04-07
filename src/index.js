@@ -24,9 +24,9 @@ const main = async () => {
         try {
 
             //Backlogのカテゴリ一覧取得する
-            const categories = await getCategories();
+            const categories = await getCategories(API_HOST, API_KEY, PROJECT_ID);
             console.log(categories);
-            const category = categories.find(t=>t.name==="bug");
+            const category = categories.find(t => t.name === "bug");
             console.log(category);
 
             // const params = new URLSearchParams();
