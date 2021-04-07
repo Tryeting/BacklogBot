@@ -16,7 +16,9 @@ exports.closeIssueAsync = async (host, key, issueId) => {
 }
 
 exports.searchIssuesAsync = async (host, key, keyword) => {
-    const url = `https://${host}/api/v2/issues?apiKey=${key}&keyword=${keyword}`;
+    const enKeyword = encodeURI(keyword);
+    console.log(enKeyword);
+    const url = `https://${host}/api/v2/issues?apiKey=${key}&keyword=${enKeyword}`;
     const res = await axios.get(url);
     return res.data;
 }
