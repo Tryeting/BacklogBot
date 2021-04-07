@@ -1,10 +1,6 @@
 const github = require('@actions/github');
 const backlog = require('./backlog');
 
-const createIssueSummary = (num, title) => {
-    return `#${num} ${title}`;
-}
-
 const main = async () => {
     //環境変数の取得
     const API_KEY = process.env.API_KEY;
@@ -17,28 +13,18 @@ const main = async () => {
     //issue作成の場合課題を作る
     if (issue.state == "open") {
         const PRIORITY_ID = "3";
-        const payload = JSON.stringify(github.context.payload, undefined, 2)
-        console.log(`The event payload: ${payload}`);
 
         //課題作成する
-        const CreateIssueUrl = `https://${API_HOST}/api/v2/issues?apiKey=${API_KEY}`;
         try {
-
-            //Backlogのカテゴリ一覧取得する
-            const categories = await backlog.getCategoriesAsync(API_HOST, API_KEY, PROJECT_ID);
-            console.log(categories);
-            const category = categories.find(t => t.name === "bug");
-            console.log(category);
-            console.log(category.id);
-
-            // const params = new URLSearchParams();
-            // params.append("projectId", PROJECT_ID);
-            // params.append("summary", createIssueSummary(issue.number,issue.title));
-            // params.append("issueTypeId", ISSUE_TYPE_ID);
-            // params.append("priorityId", PRIORITY_ID);
-            // params.append("description", `${issue.body}\n\ngithubURL：${issue.html_url}`);
-            // const res = await axios.post(CreateIssueUrl, params);
-            // console.log(res.data);
+            const params = new URLSearchParams();
+            params.append("projectId", PROJECT_ID);
+            params.append("summary", `#${issue.number} ${issue.title}`);
+            params.append("issueTypeId", ISSUE_TYPE_ID);
+            params.append("priorityId", PRIORITY_ID);
+            params.append("description", `${issue.body}\n\ngithubURL：${issue.html_url}`);
+            params.append("categoryId", CATEGORY_ID);
+            const res = backlog.addIssueAsync(API_HOST,API_KEY, params)
+            console.log(res.data);
         }
         catch (e) {
             console.log(e);
@@ -48,7 +34,7 @@ const main = async () => {
     //issue作成の場合課題を作る
     if (issue.state == "closed") {
         //対応する課題を取得
-        const keyword = createIssueSummary(issue.number, issue.title);
+        const keyword = `#${issue.number}%20${issue.title}`;
         const issues = await backlog.searchIssuesAsync(API_HOST, API_KEY, keyword);
         console.log(issues);
         console.log("issuecloseされたよ");

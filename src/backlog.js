@@ -20,3 +20,9 @@ exports.searchIssuesAsync = async (host, key, keyword) => {
     const res = await axios.get(url);
     return res.data;
 }
+
+exports.addIssueAsync = async (host, key, params) => {
+    const url = `https://${host}/api/v2/issues?apiKey=${key}`;
+    const res = await axios.post(url, params);
+    return res;
+}
